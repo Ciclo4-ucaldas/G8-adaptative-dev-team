@@ -67,9 +67,6 @@ export class Coach extends Entity {
   role?: string;
 
   @hasMany(() => OfferRequest)
-  coach_requests: OfferRequest[];
-
-  @hasMany(() => OfferRequest)
   offerRequests: OfferRequest[];
 
   @hasMany(() => Offer)

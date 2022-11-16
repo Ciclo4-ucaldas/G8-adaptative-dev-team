@@ -1,5 +1,8 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasOne, belongsTo} from '@loopback/repository';
 import {Status} from './status.model';
+import {Contract} from './contract.model';
+import {Offer} from './offer.model';
+import {Client} from './client.model';
 
 // enum Status {
 //   Wait,
@@ -40,21 +43,19 @@ export class OfferRequest extends Entity {
     required: true,
   })
   documentation: string[];
-
-  @property({
-    type: 'string',
-  })
-  clientId?: string;
-
   @property({
     type: 'string',
   })
   coachId?: string;
 
-  @property({
-    type: 'string',
-  })
-  offerId?: string;
+  @hasOne(() => Contract)
+  hisContrat: Contract;
+
+  @belongsTo(() => Offer)
+  offerId: string;
+
+  @belongsTo(() => Client)
+  clientId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data
