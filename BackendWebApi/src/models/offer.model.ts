@@ -1,6 +1,7 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Entity, model, property, hasMany, belongsTo} from '@loopback/repository';
 import {Status} from './status.model';
 import {OfferRequest} from './offer-request.model';
+import {Client} from './client.model';
 
 // let Status = new PostStatus();
 // enum offerStatus {
@@ -91,19 +92,11 @@ export class Offer extends Entity {
     required: true,
   })
   multimedia: string[];
-
-  @property({
-    type: 'string',
-  })
-  clientId?: string;
-
-  @property({
-    type: 'string',
-  })
-  coachId?: string;
-
   @hasMany(() => OfferRequest)
   offerRequests: OfferRequest[];
+
+  @belongsTo(() => Client)
+  clientId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

@@ -2,6 +2,8 @@ import {belongsTo, Entity, model, property} from '@loopback/repository';
 import {Offer} from './offer.model';
 import {Status} from './status.model';
 import {OfferRequest} from './offer-request.model';
+import {Client} from './client.model';
+import {Coach} from './coach.model';
 
 // enum oferTypeStatus {
 //   Rent,
@@ -65,18 +67,14 @@ export class Contract extends Entity {
   @belongsTo(() => Offer, {name: 'offer_close'})
   offerId: string;
 
-  @property({
-    type: 'string',
-  })
-  clientId?: string;
-
   @belongsTo(() => OfferRequest)
   offerRequestId: string;
+  
+  @belongsTo(() => Client, {name: 'hisClient'})
+  clientId: string;
 
-  @property({
-    type: 'string',
-  })
-  coachId?: string;
+  @belongsTo(() => Coach)
+  coachId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data
